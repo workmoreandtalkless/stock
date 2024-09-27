@@ -236,7 +236,9 @@ class OptionsViewer(QMainWindow):
             self.table.setItem(row_position, 3, QTableWidgetItem(f"{call.get('greeks', {}).get('ask_iv', 'N/A'):,.2f}"))
             self.table.setItem(row_position, 4, QTableWidgetItem(f"{call.get('ask', 'N/A'):,.2f}"))
             self.table.setItem(row_position, 5, QTableWidgetItem(str(call.get('asksize', 'N/A'))))
-            self.table.setItem(row_position, 6, QTableWidgetItem(str(implied_vol_call)))
+            # self.table.setItem(row_position, 6, QTableWidgetItem(str(implied_vol_call)))
+            self.table.setItem(row_position, 6, QTableWidgetItem(f"{implied_vol_call * 100:.4f}%"))
+
             # self.table.setItem(row_position, 6, QTableWidgetItem(str(call_option_iv)))
 
             # Insert strike price (common for both)
@@ -252,7 +254,8 @@ class OptionsViewer(QMainWindow):
             self.table.setItem(row_position, 11, QTableWidgetItem(f"{put.get('greeks', {}).get('ask_iv', 'N/A'):,.2f}"))
             self.table.setItem(row_position, 12, QTableWidgetItem(f"{put.get('ask', 'N/A'):,.2f}"))
             self.table.setItem(row_position, 13, QTableWidgetItem(str(put.get('asksize', 'N/A'))))
-            self.table.setItem(row_position, 14, QTableWidgetItem(str(implied_vol_put)))
+            # self.table.setItem(row_position, 14, QTableWidgetItem(str(implied_vol_put)))
+            self.table.setItem(row_position, 14, QTableWidgetItem(f"{implied_vol_put * 100:.4f}%"))
             # self.table.setItem(row_position, 14, QTableWidgetItem(str(put_option_iv)))
             # Now, options_data contains the structured data as you specified
             # print(options_data)
