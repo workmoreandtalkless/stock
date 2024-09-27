@@ -97,8 +97,8 @@ class OptionsViewer(QMainWindow):
         }
         params = {'symbols': symbol, 'greeks': 'false'}
         response = requests.get(url, headers=headers, params=params)
-        print('Status Code:', response.status_code)
-        print('Response Content:', response.content.decode('utf-8'))
+        # print('Status Code:', response.status_code)
+        # print('Response Content:', response.content.decode('utf-8'))
         response.raise_for_status()
         return response.json()
 
@@ -142,7 +142,7 @@ class OptionsViewer(QMainWindow):
             # Set the evaluation date in QuantLib
             ql.Settings.instance().evaluationDate = valuation_date
             expiration_date = ql.Date(27, 10, 2024)
-            risk_free_rate = rate
+            risk_free_rate = float(rate)
             strike_price = strike
             underlying_price = underlying_price_origin
             dividend_yield = 0.0
@@ -164,6 +164,10 @@ class OptionsViewer(QMainWindow):
             american_option = ql.VanillaOption(payoff, exercise)
 
             # Financial models setup
+            # print("Valuation Date:", valuation_date)
+            # print("Risk-Free Rate:", risk_free_rate)
+            # print("Dividend Yield:", dividend_yield)
+
             spot_handle = ql.QuoteHandle(ql.SimpleQuote(underlying_price))
             flat_ts = ql.YieldTermStructureHandle(ql.FlatForward(valuation_date, risk_free_rate, ql.Actual365Fixed()))
             div_yield = ql.YieldTermStructureHandle(ql.FlatForward(valuation_date, dividend_yield, ql.Actual365Fixed()))
